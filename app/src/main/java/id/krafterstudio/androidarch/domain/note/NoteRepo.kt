@@ -1,6 +1,5 @@
-package id.krafterstudio.androidarch.domain.repository
+package id.krafterstudio.androidarch.domain.note
 
-import id.krafterstudio.androidarch.domain.note.Note
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

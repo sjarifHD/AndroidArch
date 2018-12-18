@@ -1,18 +1,22 @@
-package id.krafterstudio.androidarch.data.remote
+package id.krafterstudio.androidarch.data.note
 
 import id.krafterstudio.androidarch.domain.note.Note
-import id.krafterstudio.androidarch.domain.repository.NoteRepo
+import id.krafterstudio.androidarch.domain.note.NoteRepo
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by sjarifhd on 11/12/18.
  * Innovation, eFishery
  */
-class NoteRemoteImp(private val noteApi: NoteApi) : NoteRepo {
+@Singleton
+class NoteRemoteImp
+@Inject constructor(private val noteService: NoteService) : NoteRepo {
 
     override fun getNotes(): Flowable<List<Note>> {
-        return noteApi.getNotes()
+        return noteService.getNotes()
             .flatMap { response ->
                 Flowable.just(response.map {
                     Note(it.id, it.title, it.body, it.createdAt.toString())
@@ -22,7 +26,7 @@ class NoteRemoteImp(private val noteApi: NoteApi) : NoteRepo {
     }
 
     override fun addNote(note: Note): Completable {
-        return noteApi.addNote(
+        return noteService.addNote(
             NoteRemote(
                 note.id,
                 note.title,

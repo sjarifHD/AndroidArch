@@ -17,6 +17,7 @@ Not all region have good network capability
 - RxJava2 (https://github.com/ReactiveX/RxJava)
 - Retrofit (https://github.com/square/retrofit)
 - ViewModel (https://developer.android.com/topic/libraries/architecture/viewmodel)
+- Dagger 2 (https://github.com/google/dagger)
 
 # Thanks
 - Fernando Cejas (https://github.com/android10)

@@ -1,23 +1,21 @@
-package id.krafterstudio.androidarch.data.job
+package id.krafterstudio.androidarch.interactor
 
 import android.os.Bundle
 import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
-import id.krafterstudio.androidarch.data.local.NoteLocalImp
-import id.krafterstudio.androidarch.data.note.NoteRepoSyncImp
-import id.krafterstudio.androidarch.data.remote.NoteApi
-import id.krafterstudio.androidarch.data.remote.NoteRemoteImp
 import id.krafterstudio.androidarch.domain.note.Note
-import id.krafterstudio.androidarch.domain.repository.NoteRepoSync
+import id.krafterstudio.androidarch.domain.note.NoteRepoSync
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 /**
  * Created by sjarifhd on 12/12/18.
  * Innovation, eFishery
  */
-class AddNoteJob : Job() {
-
-    private lateinit var noteRepoSync: NoteRepoSync
+@Singleton
+class AddNoteJob
+@Inject constructor(private val noteRepoSync: NoteRepoSync) : Job() {
 
     companion object {
         const val TAG = "add_note_job"
@@ -27,7 +25,7 @@ class AddNoteJob : Job() {
             val bundle = Bundle()
             bundle.putSerializable(KEY_NOTE, note)
 
-            return JobRequest.Builder(AddNoteJob.TAG)
+            return JobRequest.Builder(TAG)
                 .setTransientExtras(bundle)
                 .setExecutionWindow(3_000L, 10_000L)
                 .setUpdateCurrent(true)
@@ -44,7 +42,6 @@ class AddNoteJob : Job() {
         val bundle = params.transientExtras
         val note: Note = bundle.get(KEY_NOTE) as Note
 
-        noteRepoSync = NoteRepoSyncImp(NoteLocalImp(), NoteRemoteImp(NoteApi.INSTANCE))
         noteRepoSync.addNote(note)
         return Result.SUCCESS
     }

@@ -1,4 +1,4 @@
-package id.krafterstudio.androidarch.domain.repository
+package id.krafterstudio.androidarch.domain.note
 
 import id.krafterstudio.androidarch.domain.note.Note
 

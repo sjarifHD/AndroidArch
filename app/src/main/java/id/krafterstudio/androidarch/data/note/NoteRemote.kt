@@ -1,4 +1,4 @@
-package id.krafterstudio.androidarch.data.remote
+package id.krafterstudio.androidarch.data.note
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

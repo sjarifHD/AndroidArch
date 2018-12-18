@@ -51,8 +51,8 @@ dependencies {
     implementation 'com.mikepenz:fastadapter:3.3.1'
 
     // network
-    implementation "com.squareup.retrofit2:retrofit:2.4.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:3.11.0"
+    implementation "com.squareup.retrofit2:retrofit:2.5.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.0"
     implementation "com.google.code.gson:gson:2.8.5"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation ("com.github.bumptech.glide:glide:4.8.0") {
@@ -66,9 +66,9 @@ dependencies {
 //    implementation "android.arch.work:work-runtime:1.0.0-alpha12"
 
     // rxjava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.9"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.2"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
 
     // bus
     implementation 'com.mindorks.nybus:nybus-android:1.0.0'
@@ -79,4 +79,10 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
     kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    // dagger
+    implementation "com.google.dagger:dagger:2.13"
+    kapt "com.google.dagger:dagger-compiler:2.13"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+    compileOnly 'javax.inject:javax.inject:1'
 }

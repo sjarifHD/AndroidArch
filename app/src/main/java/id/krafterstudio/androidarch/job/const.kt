@@ -1,4 +1,4 @@
-package id.krafterstudio.androidarch.data.job
+package id.krafterstudio.androidarch.job
 
 /**
  * Created by sjarifhd on 12/12/18.

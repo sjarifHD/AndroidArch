@@ -1,4 +1,4 @@
-package id.krafterstudio.androidarch.data.local
+package id.krafterstudio.androidarch.data.note
 
 import io.realm.RealmObject
 import io.realm.annotations.Index

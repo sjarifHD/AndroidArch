@@ -1,15 +1,20 @@
 package id.krafterstudio.androidarch.data.note
 
-import id.krafterstudio.androidarch.data.local.NoteLocalImp
-import id.krafterstudio.androidarch.data.remote.NoteRemoteImp
 import id.krafterstudio.androidarch.domain.note.Note
-import id.krafterstudio.androidarch.domain.repository.NoteRepoSync
+import id.krafterstudio.androidarch.domain.note.NoteRepoSync
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by sjarifhd on 12/12/18.
  * Innovation, eFishery
  */
-class NoteRepoSyncImp(private val noteLocalImp: NoteLocalImp, private val noteRemoteImp: NoteRemoteImp) : NoteRepoSync {
+@Singleton
+class NoteRepoSyncImp
+@Inject constructor(
+    private val noteLocalImp: NoteLocalImp,
+    private val noteRemoteImp: NoteRemoteImp
+) : NoteRepoSync {
 
     override fun getNotes() {
         noteRemoteImp.getNotes().doOnNext {

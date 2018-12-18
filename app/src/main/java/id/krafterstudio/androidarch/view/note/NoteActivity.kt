@@ -10,17 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.krafterstudio.androidarch.App
 import id.krafterstudio.androidarch.R
-import id.krafterstudio.androidarch.data.local.NoteLocalImp
-import id.krafterstudio.androidarch.data.note.NoteRepoImp
-import id.krafterstudio.androidarch.data.note.NoteRepoSyncImp
-import id.krafterstudio.androidarch.data.remote.NoteApi
-import id.krafterstudio.androidarch.data.remote.NoteRemoteImp
-import id.krafterstudio.androidarch.domain.note.GetNotes
-import id.krafterstudio.androidarch.domain.note.GetNotesSync
-import id.krafterstudio.androidarch.domain.repository.NoteRepo
-import id.krafterstudio.androidarch.domain.repository.NoteRepoSync
+import id.krafterstudio.androidarch.di.component.ApplicationComponent
+import id.krafterstudio.androidarch.interactor.GetNotes
+import id.krafterstudio.androidarch.interactor.GetNotesSync
 import kotlinx.android.synthetic.main.activity_note.*
+import javax.inject.Inject
 
 
 /**
@@ -29,16 +25,17 @@ import kotlinx.android.synthetic.main.activity_note.*
  */
 class NoteActivity : AppCompatActivity() {
 
+    private val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
+        (application as App).appComponent
+    }
+
     private lateinit var noteAdapter: NoteAdapter
 
-    private lateinit var noteApi: NoteApi
-    private lateinit var noteLocal: NoteLocalImp
-    private lateinit var noteRemote: NoteRemoteImp
-    private lateinit var noteRepo: NoteRepo
-    private lateinit var noteRepoSync: NoteRepoSync
+    @Inject
+    lateinit var noteCase: GetNotes
 
-    private lateinit var noteCase: GetNotes
-    private lateinit var noteCaseSync: GetNotesSync
+    @Inject
+    lateinit var noteCaseSync: GetNotesSync
 
     private lateinit var noteViewModelFactory: NoteViewModelFactory
     private lateinit var noteViewModel: NoteViewModel
@@ -46,20 +43,11 @@ class NoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
+        appComponent.inject(this)
 
         noteAdapter = NoteAdapter()
         rvNote.layoutManager = LinearLayoutManager(this)
         rvNote.adapter = noteAdapter
-
-        // depedencies
-        noteApi = NoteApi.INSTANCE
-        noteLocal = NoteLocalImp()
-        noteRemote = NoteRemoteImp(noteApi)
-        noteRepo = NoteRepoImp(noteLocal)
-        noteRepoSync = NoteRepoSyncImp(noteLocal, noteRemote)
-
-        noteCase = GetNotes(noteRepo)
-        noteCaseSync = GetNotesSync(noteRepoSync)
 
         noteViewModelFactory = NoteViewModelFactory(noteCase)
         noteViewModel = ViewModelProviders.of(this, noteViewModelFactory).get(NoteViewModel::class.java)
@@ -82,8 +70,6 @@ class NoteActivity : AppCompatActivity() {
         return true
     }
 
-    var index = 255
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.sync -> {
@@ -93,10 +79,6 @@ class NoteActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item);
         }
-    }
-
-    private fun showErr(err: String?) {
-        showToast(err)
     }
 
     private fun showToast(message: String?) {
