@@ -25,11 +25,13 @@ import javax.inject.Inject
  */
 class NoteActivity : AppCompatActivity() {
 
+    // 1. get instance component
     private val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (application as App).appComponent
     }
 
-    private lateinit var noteAdapter: NoteAdapter
+    @Inject
+    lateinit var noteAdapter: NoteAdapter
 
     @Inject
     lateinit var noteCase: GetNotes
@@ -43,9 +45,10 @@ class NoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
+
+        // 2. inject to client
         appComponent.inject(this)
 
-        noteAdapter = NoteAdapter()
         rvNote.layoutManager = LinearLayoutManager(this)
         rvNote.adapter = noteAdapter
 

@@ -4,14 +4,12 @@ import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
 import id.krafterstudio.androidarch.domain.note.NoteRepoSync
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 /**
  * Created by sjarifhd on 12/12/18.
  * Innovation, eFishery
  */
-@Singleton
 class GetNotesJob
 @Inject constructor(private val noteRepoSync: NoteRepoSync) : Job() {
 

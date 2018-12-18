@@ -1,4 +1,4 @@
-package id.krafterstudio.androidarch.data.note
+package id.krafterstudio.androidarch.infrastructure.data.note
 
 import retrofit2.Retrofit
 import javax.inject.Inject

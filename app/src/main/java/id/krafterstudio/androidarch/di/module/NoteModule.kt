@@ -2,8 +2,8 @@ package id.krafterstudio.androidarch.di.module
 
 import dagger.Module
 import dagger.Provides
-import id.krafterstudio.androidarch.data.note.NoteRepoImp
-import id.krafterstudio.androidarch.data.note.NoteRepoSyncImp
+import id.krafterstudio.androidarch.infrastructure.data.note.NoteRepoImp
+import id.krafterstudio.androidarch.infrastructure.data.note.NoteRepoSyncImp
 import id.krafterstudio.androidarch.domain.note.NoteRepo
 import id.krafterstudio.androidarch.domain.note.NoteRepoSync
 

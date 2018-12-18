@@ -25,6 +25,4 @@ interface ApplicationComponent {
     fun inject(application: App)
 
     fun inject(noteActivity: NoteActivity)
-
-    fun inject(getNotesJob: GetNotesJob)
 }

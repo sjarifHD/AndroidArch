@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.krafterstudio.androidarch.R
+import javax.inject.Inject
 
 /**
  * Created by sjarifhd on 11/12/18.
  * Innovation, eFishery
  */
-class NoteAdapter : RecyclerView.Adapter<NoteHolder>() {
+class NoteAdapter
+@Inject constructor() : RecyclerView.Adapter<NoteHolder>() {
 
     private var notes: List<NoteView> = mutableListOf()
 
